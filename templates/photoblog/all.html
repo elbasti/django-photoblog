@@ -1,0 +1,7 @@
+{% extends "photoblog/base.html" %}
+
+{% block content %}
+    {% for photo in photos %}
+    {% include "photoblog/image-post.html" with photo=photo purl=photo.url only %}
+    {% endfor %}
+{% endblock content %}

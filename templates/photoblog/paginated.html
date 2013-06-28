@@ -1,0 +1,30 @@
+{% extends "photoblog/base.html" %}
+
+    {% block sidebar-right %}
+        {% if photos.number == 1 %}
+                <p>I'm trying to take one picture every day and posting it on here. Most of the pictures are taken with my Fuji X100, which I'm loving. As soon as I polish the code a bit, I'll put it up on github. Oh, all rights reserved for the photographs. If you really want to use one, <a href="/contact/">send me an email</a>.</p>
+        {% endif %}
+    {% endblock sidebar-right %}
+
+{% block content %}
+    {% for photo in photos %}
+    {% include "photoblog/image-post.html" with photo_date=photo.date photo_url=photo.url%}
+    {% endfor %}
+    <div class="pagination">
+        <p>
+            <span align="center" class="step-link">
+                {% if photos.has_previous %}
+                    <a href='?page={{photos.previous_page_number}}'>previous</a>
+                {% endif %}
+            
+                <span class="current">
+                    Page {{photos.number}} of {{photos.paginator.num_pages}}.
+                </span>
+
+                {% if photos.has_next %}
+                <a href="?page={{photos.next_page_number}}">next</a>
+                {% endif %}
+            </span>
+        </p>
+    </div>
+{% endblock content %}
